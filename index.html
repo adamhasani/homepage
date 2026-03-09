@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace - Dam</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            background-color: #0d0d0d; 
+            color: #e0e0e0; 
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .container { 
+            width: 90%; 
+            max-width: 600px; 
+            text-align: center; 
+        }
+        #clock { 
+            font-size: 4rem; 
+            font-weight: bold; 
+            color: #ffffff; 
+            margin-bottom: 5px; 
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        #date { 
+            font-size: 1.1rem; 
+            color: #888; 
+            margin-bottom: 40px; 
+        }
+        .search-box { 
+            display: flex; 
+            margin-bottom: 50px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+        .search-box input { 
+            flex: 1; 
+            padding: 15px 20px; 
+            background: #1a1a1a; 
+            border: 1px solid #333; 
+            border-right: none;
+            border-radius: 8px 0 0 8px; 
+            color: white; 
+            font-size: 1rem;
+            outline: none; 
+            font-family: inherit;
+        }
+        .search-box input:focus {
+            border-color: #555;
+        }
+        .search-box button { 
+            padding: 15px 25px; 
+            background: #2a2a2a; 
+            border: 1px solid #333; 
+            border-radius: 0 8px 8px 0; 
+            color: white; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .search-box button:hover { 
+            background: #3a3a3a; 
+        }
+        .links-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+        }
+        .link-card { 
+            background: #141414; 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: #aaa; 
+            border: 1px solid #222; 
+            transition: all 0.2s; 
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .link-card:hover { 
+            border-color: #666; 
+            color: #fff;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="clock">00:00</div>
+        <div id="date">Memuat waktu...</div>
+
+        <form class="search-box" action="https://www.google.com/search" method="GET">
+            <input type="text" name="q" placeholder="Cari sesuatu, anak Data Science?..." autocomplete="off" autofocus>
+            <button type="submit">CARI</button>
+        </form>
+
+        <div class="links-grid">
+            <a href="https://github.com/adamhasani" class="link-card">GitHub Repo</a>
+            <a href="https://vercel.com/dashboard" class="link-card">Vercel Dash</a>
+            <a href="https://siakad.uhn.ac.id" class="link-card">Portal UHN</a>
+            <a href="https://chatgpt.com/" class="link-card">AI Tools</a>
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            
+            // Format Jam
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+
+            // Format Tanggal
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('id-ID', options);
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Panggil sekali biar gak nunggu 1 detik pas baru load
+    </script>
+
+</body>
+</html>
